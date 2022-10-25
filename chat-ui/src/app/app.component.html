@@ -1,0 +1,58 @@
+<div class="page-content">
+  <div class="header">
+    <h1>Messenger with SignalR</h1>
+  </div>
+  <div class="layout">
+    <div class="send-message">
+      <input
+        [(ngModel)]="text"
+        type="text"
+        placeholder="Type message here..."
+        (keyup.enter)="sendMessage()"
+      />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+
+    <div class="messages-block">
+      <div *ngFor="let m of signalRService.messages">
+        <div
+          class="all-messages-block"
+          [ngClass]="{
+            participants: this.signalRService.connectionId !== m.ConnectionId
+          }"
+        >
+          <div class="message-item">
+            <p>
+              ID: <span>{{ m.ConnectionId }}</span>
+            </p>
+            <p>
+              Message: <span>{{ m.Text }}</span>
+            </p>
+            <p>
+              Date: <span>{{ m.DateTime }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container mt-5">
+  <h1>SignalR Chat DEMO</h1>
+  <input type="text" class="mt-3 mb-3 mr-3" [(ngModel)]="text">
+  <button class="btn btn-primary" [disabled]="text.length==0" (click)="sendMessage()">Send Message</button>
+  <h4 class="mb-3">List of Messages</h4>
+
+  <div *ngIf="signalRService.messages.length==0">
+    <p>You haven't send or received messages</p>
+  </div>
+  <div *ngFor="let m of signalRService.messages">
+    <div class="mb-2 mt-2">
+      <div><strong>ConnectionID</strong> {{m.ConnectionId}}</div>
+      <div><strong>Date</strong> {{m.DateTime }}</div>
+      <div><strong>Message</strong> {{m.Text}}</div>
+      <hr>
+    </div>
+  </div>
+</div> -->
